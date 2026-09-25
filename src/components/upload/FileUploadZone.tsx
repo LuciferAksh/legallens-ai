@@ -56,9 +56,17 @@ export function FileUploadZone({ onFileLoaded }: { onFileLoaded?: () => void }) 
         <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 mb-1">
           Drop your legal document here, or <span className="text-blue-600 dark:text-blue-400 underline">browse</span>
         </h3>
-        <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md mb-4 leading-relaxed">
-          Supports contracts, leases, offer letters, insurance terms, and NDAs in <strong>PDF</strong>, <strong>DOCX</strong>, or <strong>TXT</strong> (up to 10MB).
+        <p className="text-xs text-slate-500 dark:text-slate-400 max-w-lg mb-3 leading-relaxed">
+          Drop any legal contract across any domain (<strong>PDF</strong>, <strong>DOCX</strong>, <strong>TXT</strong> up to 10MB).
         </p>
+
+        <div className="flex flex-wrap items-center justify-center gap-1.5 mb-4 max-w-lg">
+          {['Rental & Leases', 'Employment Offers', 'Mutual NDAs', 'Freelance & SaaS', 'Insurance Policies', 'Loans & Credit', 'Terms of Service'].map((d) => (
+            <span key={d} className="px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-[10px] text-slate-600 dark:text-slate-300 font-medium">
+              {d}
+            </span>
+          ))}
+        </div>
 
         <div className="flex flex-wrap items-center justify-center gap-2 text-[11px] text-slate-400 font-medium">
           <span className="flex items-center gap-1">

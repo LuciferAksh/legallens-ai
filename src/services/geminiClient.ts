@@ -7,6 +7,7 @@
 
 import { APP_CONFIG } from '../constants';
 import { StreamCallbacks, GenerationMetrics } from '../types/api';
+import { ALL_SAMPLE_DOCUMENTS } from '../constants/sampleDocuments';
 
 class GeminiClientService {
   private apiKey: string = '';
@@ -264,121 +265,11 @@ class GeminiClientService {
     const lower = prompt.toLowerCase();
 
     if (lower.includes('risk evaluation rubric') || lower.includes('contract clauses and identify significant risks')) {
-      text = JSON.stringify([
-        {
-          clauseId: 'c3',
-          clauseTitle: 'Security Deposit Deductions & 90-Day Delay',
-          sectionPath: 'Section 3 > Security Deposit',
-          severity: 'critical',
-          category: 'financial',
-          sourceQuote: 'deduct 1 full month rent towards painting and refurbishment charges regardless of premises condition, and refund the balance within 90 days',
-          title: 'Arbitrary Painting Forfeiture & 90-Day Hold',
-          explanation: 'Mandatory deduction of ₹42,000 even if the apartment is spotless, coupled with an excessive 90-day waiting period to return your money.',
-          practicalImpact: 'Loss of ₹42,000 + ₹3,50,000 liquidity frozen for three months.',
-          recommendedAction: 'Propose deduction strictly for documented damage beyond normal wear and tear; demand refund within 15 days.',
-          suggestedNegotiationRedline: 'The Lessor shall refund the complete security deposit within 15 (fifteen) business days of vacating, subject to deductions only for actual documented damages beyond reasonable wear and tear.',
-          legalBasisOrJurisdictionNotice: 'Karnataka Model Tenancy Act principles; Section 74 Indian Contract Act 1872.',
-        },
-        {
-          clauseId: 'c4',
-          clauseTitle: 'Unannounced Entry & Major Repairs Burden',
-          sectionPath: 'Section 4 > Maintenance, Repairs and Alterations',
-          severity: 'critical',
-          category: 'liability',
-          sourceQuote: 'Lessee shall bear all costs of internal minor and major repairs including plumbing, electrical fixtures, seepage repairs... Lessor retains the right to inspect at any time without prior written notice',
-          title: 'Structural Seepage Burden & Total Loss of Domestic Privacy',
-          explanation: 'Forces tenant to pay for structural landlord repairs and allows unannounced entry at any hour.',
-          practicalImpact: 'Unexpected expenses of ₹50,000+ for seepage, and landlord showing up without warning.',
-          recommendedAction: 'Require 24-hour advance written notice for inspections during daytime, and limit tenant responsibility to minor repairs under ₹1,000.',
-          suggestedNegotiationRedline: 'Lessor shall be solely responsible for structural, plumbing, and seepage repairs. Inspections require 24 hours prior written notice during daytime hours.',
-        },
-        {
-          clauseId: 'c5',
-          clauseTitle: 'Asymmetric Termination & Liquidated Damages',
-          sectionPath: 'Section 5 > Termination and Notice Period',
-          severity: 'critical',
-          category: 'termination',
-          sourceQuote: 'Lessor may terminate... 15 days written notice... Lessee must provide at least 2 full calendar months... liquidated damages of Rs. 5,000 per day',
-          title: 'One-Sided 15-Day Eviction vs 60-Day Tenant Notice',
-          explanation: 'Grossly asymmetric notice period and an exorbitant ₹5,000/day overstay penalty.',
-          practicalImpact: 'Sudden displacement risk or ₹1.5 Lakh/month overstay penalty.',
-          recommendedAction: 'Standardize notice to mutual 1 month for both parties, and calculate overstay at standard prorated daily rent.',
-        },
-        {
-          clauseId: 'c1',
-          clauseTitle: 'Lock-in Period Forfeiture',
-          sectionPath: 'Section 1 > Term and Tenure',
-          severity: 'high',
-          category: 'financial',
-          sourceQuote: 'mandatory lock-in period of 6 months... entire security deposit shall stand forfeited automatically',
-          title: 'Disproportionate Penalty on Relocation',
-          explanation: 'Early vacation results in complete loss of ₹3,50,000 deposit, which exceeds genuine pre-estimated losses.',
-          practicalImpact: 'Total forfeiture of deposit on early transfer.',
-          recommendedAction: 'Limit early exit penalty to maximum 1 month rent or allow finding a replacement tenant.',
-          legalBasisOrJurisdictionNotice: 'Section 74, Indian Contract Act 1872 (Stipulation for penalty void).',
-        },
-      ]);
+      text = this.getSimulatedRisksForPrompt(prompt);
     } else if (lower.includes('executive summary') || lower.includes('overall risk score')) {
-      text = JSON.stringify({
-        executiveSummary: 'This document contains several high-risk clauses that heavily favor the drafting party. Crucial areas of concern include automatic non-refundable deductions, asymmetric termination rights, long refund delays, and unilateral dispute resolution mechanisms. Negotiating these key points prior to execution is strongly advised.',
-        overallRiskScore: 78,
-        overallRiskSeverity: 'critical',
-        keyTerms: [
-          {
-            term: 'Lock-in Period',
-            definedInClause: 'Section 1',
-            legalMeaning: 'A minimum term during which neither party can terminate without contractual penalty.',
-            plainEnglishExplanation: 'A mandatory stay period where leaving early triggers hefty financial penalties.',
-            whyItMattersToYou: 'Exiting before 6 months costs your entire security deposit.',
-          },
-          {
-            term: 'Liquidated Damages',
-            definedInClause: 'Section 5',
-            legalMeaning: 'A pre-determined monetary sum agreed upon to compensate for specific breaches.',
-            plainEnglishExplanation: 'A pre-set daily fine of ₹5,000 charged if you delay vacating.',
-            whyItMattersToYou: 'Far exceeds normal market rent (₹1,400/day).',
-          },
-        ],
-        checklist: [
-          {
-            id: 'chk-1',
-            category: 'before_signing',
-            action: 'Negotiate security deposit refund timeline from 90 days down to 15 days.',
-            sourceSection: 'Section 3',
-            priority: 'must_do',
-            completed: false,
-          },
-          {
-            id: 'chk-2',
-            category: 'before_signing',
-            action: 'Remove clause requiring mandatory 1-month rent deduction for painting.',
-            sourceSection: 'Section 3',
-            priority: 'must_do',
-            completed: false,
-          },
-          {
-            id: 'chk-3',
-            category: 'before_signing',
-            action: 'Add 24-hour advance written notice requirement before landlord enters premises.',
-            sourceSection: 'Section 4',
-            priority: 'must_do',
-            completed: false,
-          },
-        ],
-        lawyerPrepGuide: [
-          {
-            id: 'lp-1',
-            topic: 'Security Deposit Deduction',
-            specificClauseReference: 'Section 3',
-            suggestedQuestion: 'How can we legally structure the deposit refund clause to mandate itemized proof for painting deductions?',
-            contextWhyAsk: 'The landlord currently requires automatic forfeiture of ₹42,000.',
-            documentsToBring: ['Lease draft', 'Inspection sheet'],
-            targetOutcome: 'A balanced redline clause tying deductions only to documented damage.',
-          },
-        ],
-      });
+      text = this.getSimulatedSummaryForPrompt(prompt);
     } else {
-      text = 'Based on the provided legal document, the commitments outlined establish specific legal duties. Please review Section 3 and Section 4 for detailed financial liabilities and notice stipulations.';
+      text = 'Based on the provided legal document, the commitments outlined establish specific legal duties. Please review the highlighted clauses for detailed financial liabilities and notice stipulations.';
     }
 
     return {
@@ -389,17 +280,252 @@ class GeminiClientService {
     };
   }
 
+  private getSimulatedRisksForPrompt(prompt: string): string {
+    const lower = prompt.toLowerCase();
+
+    // 1. Check if matches any pre-loaded sample
+    for (const sample of ALL_SAMPLE_DOCUMENTS) {
+      if (
+        sample.risks &&
+        sample.risks.length > 0 &&
+        (lower.includes(sample.name.toLowerCase()) ||
+          lower.includes(sample.id) ||
+          lower.includes(sample.metadata.detectedType))
+      ) {
+        return JSON.stringify(sample.risks);
+      }
+    }
+
+    // 2. Keyword detection for domain
+    if (lower.includes('nda') || lower.includes('confidential') || lower.includes('trade secret')) {
+      const nda = ALL_SAMPLE_DOCUMENTS.find((d) => d.metadata.detectedType === 'nda');
+      if (nda?.risks) return JSON.stringify(nda.risks);
+    }
+    if (lower.includes('freelance') || lower.includes('independent contractor') || lower.includes('developer')) {
+      const fl = ALL_SAMPLE_DOCUMENTS.find((d) => d.metadata.detectedType === 'freelance_service_agreement');
+      if (fl?.risks) return JSON.stringify(fl.risks);
+    }
+    if (lower.includes('insurance') || lower.includes('policyholder') || lower.includes('hospitalization') || lower.includes('room rent')) {
+      const ins = ALL_SAMPLE_DOCUMENTS.find((d) => d.metadata.detectedType === 'insurance_policy');
+      if (ins?.risks) return JSON.stringify(ins.risks);
+    }
+    if (lower.includes('loan') || lower.includes('borrower') || lower.includes('lender') || lower.includes('penal interest')) {
+      const loan = ALL_SAMPLE_DOCUMENTS.find((d) => d.metadata.detectedType === 'loan_agreement');
+      if (loan?.risks) return JSON.stringify(loan.risks);
+    }
+    if (lower.includes('employment') || lower.includes('employee') || lower.includes('probation')) {
+      const emp = ALL_SAMPLE_DOCUMENTS.find((d) => d.metadata.detectedType === 'employment_contract');
+      if (emp?.risks) return JSON.stringify(emp.risks);
+    }
+
+    // 3. Fallback: Parse clauses dynamically from custom uploaded document
+    const clauseMatches = Array.from(prompt.matchAll(/\[ID:\s*([^\]]+)\]\s*([^:\n]+):\s*\n"([^"]+)"/g));
+    if (clauseMatches.length > 0) {
+      const dynamicRisks = clauseMatches.slice(0, 3).map((m, idx) => {
+        const clauseId = m[1].trim();
+        const sectionPath = m[2].trim();
+        const rawClause = m[3].trim();
+        const quote = rawClause.slice(0, Math.min(90, rawClause.length));
+
+        return {
+          clauseId,
+          clauseTitle: sectionPath,
+          sectionPath,
+          severity: idx === 0 ? 'critical' : 'high',
+          category: 'liability',
+          sourceQuote: quote,
+          title: `Key Risk in ${sectionPath}`,
+          explanation: `This clause establishes significant operational, financial, or compliance duties.`,
+          practicalImpact: `Enforces strict legal requirements that may limit operational flexibility or trigger unexpected liabilities.`,
+          recommendedAction: `Propose balanced reciprocal covenants before executing this agreement.`,
+          suggestedNegotiationRedline: `Both parties shall act in good faith and limit liability to direct documented losses.`,
+          legalBasisOrJurisdictionNotice: `General Contract Law & Statutory Protections (Indian Contract Act 1872).`,
+        };
+      });
+      return JSON.stringify(dynamicRisks);
+    }
+
+    return JSON.stringify(ALL_SAMPLE_DOCUMENTS[0].risks || []);
+  }
+
+  private getSimulatedSummaryForPrompt(prompt: string): string {
+    const lower = prompt.toLowerCase();
+
+    for (const sample of ALL_SAMPLE_DOCUMENTS) {
+      if (
+        sample.summary &&
+        (lower.includes(sample.name.toLowerCase()) ||
+          lower.includes(sample.id) ||
+          lower.includes(sample.metadata.detectedType))
+      ) {
+        return JSON.stringify(sample.summary);
+      }
+    }
+
+    if (lower.includes('nda') || lower.includes('confidential')) {
+      const nda = ALL_SAMPLE_DOCUMENTS.find((d) => d.metadata.detectedType === 'nda');
+      if (nda?.summary) return JSON.stringify(nda.summary);
+    }
+    if (lower.includes('freelance') || lower.includes('independent contractor')) {
+      const fl = ALL_SAMPLE_DOCUMENTS.find((d) => d.metadata.detectedType === 'freelance_service_agreement');
+      if (fl?.summary) return JSON.stringify(fl.summary);
+    }
+    if (lower.includes('insurance') || lower.includes('policyholder')) {
+      const ins = ALL_SAMPLE_DOCUMENTS.find((d) => d.metadata.detectedType === 'insurance_policy');
+      if (ins?.summary) return JSON.stringify(ins.summary);
+    }
+    if (lower.includes('loan') || lower.includes('borrower')) {
+      const loan = ALL_SAMPLE_DOCUMENTS.find((d) => d.metadata.detectedType === 'loan_agreement');
+      if (loan?.summary) return JSON.stringify(loan.summary);
+    }
+    if (lower.includes('employment') || lower.includes('employee')) {
+      const emp = ALL_SAMPLE_DOCUMENTS.find((d) => d.metadata.detectedType === 'employment_contract');
+      if (emp?.summary) return JSON.stringify(emp.summary);
+    }
+
+    return JSON.stringify({
+      executiveSummary: 'This document establishes formal contractual commitments between the parties. High priority areas include liability limitations, termination mechanisms, and payment schedules.',
+      overallRiskScore: 74,
+      overallRiskSeverity: 'high',
+      keyTerms: [
+        {
+          term: 'Limitation of Liability',
+          definedInClause: 'Liability Section',
+          legalMeaning: 'A contractual cap on the financial recovery permitted in the event of breach.',
+          plainEnglishExplanation: 'The maximum sum one party can be forced to pay.',
+          whyItMattersToYou: 'Prevents catastrophic runaway lawsuits.',
+        },
+        {
+          term: 'Governing Law',
+          definedInClause: 'Jurisdiction Section',
+          legalMeaning: 'The statutory framework and jurisdiction chosen to adjudicate disputes.',
+          plainEnglishExplanation: 'Which court and state laws rule over this agreement.',
+          whyItMattersToYou: 'Determines convenience and legal cost if a dispute arises.',
+        },
+      ],
+      checklist: [
+        {
+          id: 'gen-chk-1',
+          category: 'before_signing',
+          action: 'Ensure termination for convenience has at least 30 days notice.',
+          sourceSection: 'Termination',
+          priority: 'must_do',
+          completed: false,
+        },
+        {
+          id: 'gen-chk-2',
+          category: 'before_signing',
+          action: 'Cap liability to the total fees paid or received under this contract.',
+          sourceSection: 'Liability',
+          priority: 'must_do',
+          completed: false,
+        },
+      ],
+      lawyerPrepGuide: [
+        {
+          id: 'gen-lp-1',
+          topic: 'Liability and Indemnity Risk',
+          specificClauseReference: 'Liability Clause',
+          suggestedQuestion: 'How can we negotiate a mutual liability cap that protects us from uncapped exposure?',
+          contextWhyAsk: 'To prevent one-sided indemnification obligations.',
+          documentsToBring: ['Contract Draft'],
+          targetOutcome: 'A reciprocal, bounded indemnity clause.',
+        },
+      ],
+    });
+  }
+
   private async simulateStreamingResponse(prompt: string, callbacks: StreamCallbacks): Promise<void> {
     let mockResponse = '';
+    const lower = prompt.toLowerCase();
 
-    if (prompt.toLowerCase().includes('deposit') || prompt.toLowerCase().includes('refund')) {
+    if (lower.includes('nda') || lower.includes('confidential') || lower.includes('trade secret')) {
+      mockResponse = `According to **[Clause 6: Liquidated Damages]**, any breach of non-disclosure imposes an automatic penalty of **Rs. 50,00,000 (Fifty Lakhs)** per incident.
+      
+Furthermore, under **[Clause 3: Duration]**, trade secret confidentiality is stated to survive *perpetually in perpetuity*.
+
+**Key Risks & Advice:**
+1. Under Indian law (Section 74 of the Indian Contract Act 1872), liquidated damages must reflect genuine pre-estimated losses rather than a punitive penalty.
+2. Injunctions can be sought without posting security under Clause 5.
+
+**Recommendation:** Negotiate to remove the fixed ₹50 Lakh penalty and limit confidentiality duration to 3–5 years.
+
+\`\`\`meta
+{
+  "citations": [
+    { "clauseNumber": "6", "sectionPath": "Section 6 > Liquidated Damages", "quoteSnippet": "subject the Receiving Party to liquidated damages of Rs. 50,00,000/- (Rupees Fifty Lakhs) per incident" }
+  ],
+  "suggestedFollowUps": [
+    "Is perpetual confidentiality enforceable in India?",
+    "How can I remove the injunction bond waiver?"
+  ]
+}
+\`\`\``;
+    } else if (lower.includes('freelance') || lower.includes('code') || lower.includes('ip') || lower.includes('developer')) {
+      mockResponse = `According to **[Clause 3: Pre-Payment Intellectual Property Assignment]**, all copyright and IP rights in your code transfer to the Client *immediately upon creation*, **irrespective of whether the client has paid your invoice**.
+
+**Key Red Flags:**
+1. **Pre-Payment IP Transfer:** If the client defaults on payment, they still legally own your codebase.
+2. **Net 90 Payment:** You must wait 90 days after milestone approval to receive funds.
+3. **Unlimited Indemnity:** Under Clause 4, you personally indemnify the client for bugs and third-party claims.
+
+**Recommendation:** Make IP assignment strictly contingent upon receipt of full payment into your bank account.
+
+\`\`\`meta
+{
+  "citations": [
+    { "clauseNumber": "3", "sectionPath": "Section 3 > Intellectual Property", "quoteSnippet": "transfer and vest in Client immediately upon creation, irrespective of whether Client has paid the corresponding invoice" }
+  ],
+  "suggestedFollowUps": [
+    "How to rephrase the IP clause to require payment first?",
+    "What is the risk of the Net 90 payment term?"
+  ]
+}
+\`\`\``;
+    } else if (lower.includes('insurance') || lower.includes('claim') || lower.includes('hospital') || lower.includes('room rent')) {
+      mockResponse = `According to **[Clause 2: Room Rent Sub-Limit]**, normal room rent is capped at **1% of Sum Insured (₹10,000/day)**. If you choose a room exceeding this limit, **proportionate deductions** apply across all surgeon, OT, and medical bills.
+
+**Critical Policy Conditions:**
+1. **48-Hour Notice:** Under Clause 3, failure to notify within 24 hours of emergency hospitalization triggers absolute claim forfeiture. (Note: IRDAI circulars prohibit rejecting genuine claims solely on notification delays).
+2. **20% Co-Payment:** Clause 4 mandates that you pay 20% of every admissible hospital bill out of pocket.
+
+\`\`\`meta
+{
+  "citations": [
+    { "clauseNumber": "2", "sectionPath": "Section 2 > Room Rent Sub-Limit", "quoteSnippet": "all associated medical expenses including surgeon fees, OT charges, and consultation fees shall be subject to proportionate deduction penalty" }
+  ],
+  "suggestedFollowUps": [
+    "How does the IRDAI circular protect against delayed notice?",
+    "What is the financial impact of proportionate deductions?"
+  ]
+}
+\`\`\``;
+    } else if (lower.includes('loan') || lower.includes('interest') || lower.includes('bank') || lower.includes('acceleration')) {
+      mockResponse = `According to **[Clause 3: Acceleration and Recall]**, the lender may declare the entire ₹25 Lakh principal immediately due and payable within **48 hours** based on subjective opinion.
+
+**Major Financial Traps:**
+1. **24% Penal Compound Interest:** Under Clause 2, administrative delays in submitting quarterly reports trigger 24% interest compounded monthly. (RBI Fair Lending Practices prohibit compounding penal interest).
+2. **Blanket Asset Lien:** Clause 4 creates a personal lien over all personal and ancestral assets of the promoters.
+
+\`\`\`meta
+{
+  "citations": [
+    { "clauseNumber": "3", "sectionPath": "Section 3 > Acceleration and Recall", "quoteSnippet": "declare the entire outstanding principal immediately due and payable within 48 hours" }
+  ],
+  "suggestedFollowUps": [
+    "Does RBI permit 24% compound penal interest?",
+    "How to add a 30-day cure period for loan defaults?"
+  ]
+}
+\`\`\``;
+    } else if (lower.includes('deposit') || lower.includes('refund') || lower.includes('rent') || lower.includes('lease')) {
       mockResponse = `According to **[Clause 3: Security Deposit]**, you deposited ₹3,50,000 as an interest-free refundable deposit. 
 
-However, there are two major red flags you should note:
-1. **Mandatory Painting Deduction:** The landlord mandates deducting **one full month of rent (₹42,000)** for painting regardless of whether the walls are in immaculate condition.
-2. **90-Day Refund Delay:** The landlord allows themselves up to **90 days** post-inspection to return your balance money. In contrast, standard practice in Karnataka is 7 to 15 days.
+However, there are two major red flags:
+1. **Mandatory Painting Deduction:** The landlord mandates deducting **one full month of rent (₹42,000)** for painting regardless of whether the premises are spotless.
+2. **90-Day Refund Delay:** The landlord allows themselves up to **90 days** post-inspection to return your balance. Standard practice in Karnataka is 7 to 15 days.
 
-**Recommendation:** Before signing, propose modifying this clause so that painting deductions require itemized invoices for damage beyond normal wear and tear, and set the refund window to 15 business days.
+**Recommendation:** Propose deductions strictly for documented damage beyond normal wear and tear, and set the refund window to 15 business days.
 
 \`\`\`meta
 {
@@ -413,16 +539,16 @@ However, there are two major red flags you should note:
 }
 \`\`\``;
     } else {
-      mockResponse = `Based on your uploaded contract, here are the key facts regarding your inquiry:
+      mockResponse = `Based on your contract, here are the key findings regarding your inquiry:
 
-1. **Governing Terms:** The obligations in this agreement bind both parties from the commencement date specified in Section 1.
-2. **Key Liabilities:** Please note the strict timelines for notices and default penalties specified in the document clauses.
-3. **Statutory Protection:** Under Indian law (Indian Contract Act 1872), penalties that are disproportionate to actual damage suffered may be challenged under Section 74.
+1. **Governing Covenants:** The commitments in this agreement bind both parties from the commencement date.
+2. **Key Liabilities:** Review the strict notice timelines and default remedies specified in the document clauses.
+3. **Statutory Protections:** Under contract law (e.g. Indian Contract Act 1872), disproportionate penalties or restrictive covenants may be legally challenged.
 
 \`\`\`meta
 {
   "citations": [
-    { "clauseNumber": "1", "sectionPath": "Section 1", "quoteSnippet": "commencing from 1st April 2025" }
+    { "clauseNumber": "1", "sectionPath": "Section 1", "quoteSnippet": "as specified in Statement of Work" }
   ],
   "suggestedFollowUps": [
     "What are my rights if the counterparty breaches?",

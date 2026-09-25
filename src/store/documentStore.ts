@@ -5,7 +5,11 @@
 
 import { create } from 'zustand';
 import { LegalDocument } from '../types/legal';
-import { SAMPLE_RENTAL_AGREEMENT, SAMPLE_EMPLOYMENT_CONTRACT, SAMPLE_COMPARISON_TARGET } from '../constants/sampleDocuments';
+import {
+  SAMPLE_RENTAL_AGREEMENT,
+  SAMPLE_COMPARISON_TARGET,
+  ALL_SAMPLE_DOCUMENTS,
+} from '../constants/sampleDocuments';
 
 interface DocumentState {
   documents: LegalDocument[];
@@ -21,12 +25,12 @@ interface DocumentState {
   setActiveDocumentById: (id: string) => void;
   removeDocument: (id: string) => void;
   setComparisonDocs: (docA: LegalDocument | null, docB: LegalDocument | null) => void;
-  loadSampleDocument: (sampleType: 'rental' | 'employment') => void;
+  loadSampleDocument: (sampleTypeOrId: string) => void;
   clearAll: () => void;
 }
 
 export const useDocumentStore = create<DocumentState>((set, get) => ({
-  documents: [SAMPLE_RENTAL_AGREEMENT, SAMPLE_EMPLOYMENT_CONTRACT],
+  documents: ALL_SAMPLE_DOCUMENTS,
   activeDocument: SAMPLE_RENTAL_AGREEMENT,
   comparisonDocumentA: SAMPLE_RENTAL_AGREEMENT,
   comparisonDocumentB: SAMPLE_COMPARISON_TARGET,
@@ -67,10 +71,23 @@ export const useDocumentStore = create<DocumentState>((set, get) => ({
     });
   },
 
-  loadSampleDocument: (sampleType) => {
-    const doc = sampleType === 'rental' ? SAMPLE_RENTAL_AGREEMENT : SAMPLE_EMPLOYMENT_CONTRACT;
+  loadSampleDocument: (sampleTypeOrId) => {
+    const key = sampleTypeOrId.toLowerCase();
+    const doc =
+      ALL_SAMPLE_DOCUMENTS.find(
+        (d) =>
+          d.id === sampleTypeOrId ||
+          d.metadata.detectedType.includes(key) ||
+          (key === 'rental' && d.id.includes('rental')) ||
+          (key === 'employment' && d.id.includes('employment')) ||
+          (key === 'nda' && d.id.includes('nda')) ||
+          (key === 'freelance' && d.id.includes('freelance')) ||
+          (key === 'insurance' && d.id.includes('insurance')) ||
+          (key === 'loan' && d.id.includes('loan')),
+      ) || ALL_SAMPLE_DOCUMENTS[0];
+
     set((state) => ({
-      documents: [doc, ...state.documents.filter((d) => d.id !== doc.id)],
+      documents: state.documents.some((d) => d.id === doc.id) ? state.documents : [doc, ...state.documents],
       activeDocument: doc,
     }));
   },

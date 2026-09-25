@@ -12,7 +12,15 @@ import {
   ChatMessage,
 } from '../types/legal';
 import { LoopTelemetry, LoopStepTrace } from '../services/loopEngine/types';
-import { SAMPLE_RENTAL_AGREEMENT } from '../constants/sampleDocuments';
+import { SAMPLE_RENTAL_AGREEMENT, ALL_SAMPLE_DOCUMENTS } from '../constants/sampleDocuments';
+
+const initialSummaries: Record<string, DocumentSummary> = {};
+const initialRisks: Record<string, RiskAssessment[]> = {};
+
+ALL_SAMPLE_DOCUMENTS.forEach((doc) => {
+  if (doc.summary) initialSummaries[doc.id] = doc.summary;
+  if (doc.risks) initialRisks[doc.id] = doc.risks;
+});
 
 interface AnalysisState {
   summaries: Record<string, DocumentSummary>; // keyed by documentId
@@ -39,12 +47,8 @@ interface AnalysisState {
 }
 
 export const useAnalysisStore = create<AnalysisState>((set) => ({
-  summaries: {
-    [SAMPLE_RENTAL_AGREEMENT.id]: SAMPLE_RENTAL_AGREEMENT.summary!,
-  },
-  risks: {
-    [SAMPLE_RENTAL_AGREEMENT.id]: SAMPLE_RENTAL_AGREEMENT.risks!,
-  },
+  summaries: initialSummaries,
+  risks: initialRisks,
   telemetry: {
     [SAMPLE_RENTAL_AGREEMENT.id]: {
       loopId: 'loop-sample-rental',

@@ -130,34 +130,57 @@ function evaluatePreliminaryClauseRisk(
 ): Clause['riskLevel'] {
   const combined = `${title} ${content}`.toLowerCase();
 
-  // Critical patterns: forfeiture, unilateral termination, unlimited indemnity, non-compete
+  // Critical patterns across all contract domains:
+  // - Real Estate: automatic deposit forfeiture, unannounced entry
+  // - Employment: void non-compete, personal software indemnity
+  // - NDAs: perpetual confidentiality, liquidated damages, injunction without bond
+  // - Freelance/SaaS: pre-payment IP transfer, uncapped contractor liability
+  // - Insurance: proportionate deduction penalty, claim notice forfeiture
+  // - Loans: subjective acceleration recall, blanket lien on personal assets, 24%+ compound penal interest
   if (
     combined.includes('forfeited automatically') ||
     combined.includes('sole discretion without assigning reason') ||
     combined.includes('indemnify, defend, and hold harmless') ||
     combined.includes('non-compete') ||
     combined.includes('restraint of trade') ||
-    combined.includes('liquidated damages')
+    combined.includes('liquidated damages') ||
+    combined.includes('without the necessity of posting any bond') ||
+    combined.includes('transfer and vest in client immediately upon creation') ||
+    combined.includes('proportionate deduction') ||
+    combined.includes('declare the entire outstanding principal immediately due') ||
+    combined.includes('absolute forfeiture and rejection of the entire claim') ||
+    combined.includes('negative lien is created over all personal bank accounts')
   ) {
     return 'critical';
   }
 
-  // High patterns: penalty, inspection without notice, lock-in, 90 days, unilateral
+  // High patterns: penalty rates, long holdbacks, asymmetric notice, co-pays
   if (
     combined.includes('without prior written notice') ||
     combined.includes('lock-in') ||
     combined.includes('withhold relieving') ||
     combined.includes('sole arbitrator appointed exclusively') ||
-    combined.includes('interest penalty of 24%')
+    combined.includes('interest penalty of 24%') ||
+    combined.includes('penal interest of 24%') ||
+    combined.includes('net 90') ||
+    combined.includes('perpetually in perpetuity') ||
+    combined.includes('co-payment of 20%') ||
+    combined.includes('foreclosure penalty') ||
+    combined.includes('room rent is capped') ||
+    combined.includes('pre-existing disease')
   ) {
     return 'high';
   }
 
-  // Medium patterns
+  // Medium patterns: standard commercial friction terms
   if (
     combined.includes('probation') ||
     combined.includes('maintenance charges') ||
-    combined.includes('prior written consent')
+    combined.includes('prior written consent') ||
+    combined.includes('net 60') ||
+    combined.includes('work made for hire') ||
+    combined.includes('subrogation') ||
+    combined.includes('benchmark floating rate')
   ) {
     return 'medium';
   }

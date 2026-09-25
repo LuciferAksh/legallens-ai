@@ -662,3 +662,755 @@ Both parties may terminate with mutual 1 (one) calendar month notice. Overstay d
 Tenant shall maintain peaceful residential enjoyment. Reasonable visitors permitted.`,
   clauses: [],
 };
+
+export const SAMPLE_NDA: LegalDocument = {
+  id: 'sample-nda-03',
+  name: 'Mutual_Non_Disclosure_Agreement_Biotech.pdf',
+  uploadedAt: new Date().toISOString(),
+  metadata: {
+    fileName: 'Mutual_Non_Disclosure_Agreement_Biotech.pdf',
+    fileSize: 34200,
+    fileType: 'pdf',
+    pageCount: 3,
+    wordCount: 1150,
+    characterCount: 7400,
+    detectedType: 'nda',
+    jurisdictionHint: 'Republic of India (Subject to Indian Contract Act 1872)',
+    parsedAt: new Date().toISOString(),
+  },
+  rawText: `MUTUAL NON-DISCLOSURE AND PROPRIETARY INFORMATION AGREEMENT
+
+This Mutual Non-Disclosure Agreement is executed on 12th February 2025 by and between:
+Aura BioTech Pvt. Ltd., having its principal office in Mumbai, Maharashtra ("Disclosing Party");
+AND
+Zenith Therapeutics LLP ("Receiving Party").
+
+1. SCOPE OF CONFIDENTIAL INFORMATION
+Confidential Information includes all technical, business, financial, or scientific data disclosed whether marked confidential or not, including information disclosed orally without requiring subsequent written memorialization.
+
+2. NON-DISCLOSURE AND EXCLUSIONS
+The Receiving Party shall exercise the highest degree of care. The obligations shall not apply only if Receiving Party proves by clear and convincing documentary evidence that the information was already publicly known without breach.
+
+3. DURATION AND PERPETUAL SURVIVAL
+The confidentiality obligations under this Agreement shall survive the termination of discussions and shall remain in effect perpetually in perpetuity for all trade secrets and technical specifications, and for a period of 10 (ten) years for all commercial data.
+
+4. RETURN AND IRREVOCABLE DESTRUCTION
+Within 5 (five) calendar days of written request, Receiving Party shall irrevocably destroy all notes, analysis, backups, and computer records, with no exceptions permitted for automated disaster recovery backups or statutory compliance copies.
+
+5. EQUITABLE RELIEF AND WAIVER OF BOND
+Receiving Party acknowledges that any breach will cause irreparable injury for which monetary damages alone would be inadequate. Disclosing Party shall be entitled to an immediate ex-parte temporary restraining order and permanent injunction without the necessity of posting any bond or proof of actual financial damages.
+
+6. LIQUIDATED DAMAGES FOR BREACH
+In addition to injunctive relief, any disclosure in violation of Section 2 shall subject the Receiving Party to liquidated damages of Rs. 50,00,000/- (Rupees Fifty Lakhs) per incident, regardless of actual loss incurred.
+
+7. GOVERNING LAW AND EXCLUSIVE JURISDICTION
+This Agreement shall be governed exclusively by the laws of Maharashtra, India, with exclusive venue in the courts of Mumbai.`,
+  clauses: [
+    {
+      id: 'nda_c1',
+      clauseNumber: '1',
+      title: 'Scope of Confidential Information',
+      sectionPath: 'Section 1 > Scope of Confidential Information',
+      rawText: 'Confidential Information includes all technical, business, financial, or scientific data disclosed whether marked confidential or not, including information disclosed orally without requiring subsequent written memorialization.',
+      plainLanguageSummary: 'Anything shared—even offhand spoken remarks without any written record—is automatically deemed confidential.',
+      simplifiedReadabilityScore: 7.8,
+      riskLevel: 'medium',
+      riskCategory: 'compliance',
+      isStandardClause: false,
+      obligations: [],
+      rights: [],
+    },
+    {
+      id: 'nda_c3',
+      clauseNumber: '3',
+      title: 'Duration and Perpetual Survival',
+      sectionPath: 'Section 3 > Duration and Perpetual Survival',
+      rawText: 'The confidentiality obligations under this Agreement shall survive the termination of discussions and shall remain in effect perpetually in perpetuity for all trade secrets and technical specifications, and for a period of 10 (ten) years for all commercial data.',
+      plainLanguageSummary: 'You are bound forever on technical data and for 10 years on commercial details, which is unusually long for standard business discussions.',
+      simplifiedReadabilityScore: 8.2,
+      riskLevel: 'high',
+      riskCategory: 'liability',
+      isStandardClause: false,
+      obligations: [],
+      rights: [],
+    },
+    {
+      id: 'nda_c5',
+      clauseNumber: '5',
+      title: 'Equitable Relief and Waiver of Bond',
+      sectionPath: 'Section 5 > Equitable Relief and Waiver of Bond',
+      rawText: 'Receiving Party acknowledges that any breach will cause irreparable injury for which monetary damages alone would be inadequate. Disclosing Party shall be entitled to an immediate ex-parte temporary restraining order and permanent injunction without the necessity of posting any bond or proof of actual financial damages.',
+      plainLanguageSummary: 'The other party can obtain an immediate court injunction freezing your operations without proving financial harm or posting a security deposit with the court.',
+      simplifiedReadabilityScore: 8.5,
+      riskLevel: 'critical',
+      riskCategory: 'liability',
+      isStandardClause: false,
+      obligations: [],
+      rights: [],
+    },
+    {
+      id: 'nda_c6',
+      clauseNumber: '6',
+      title: 'Liquidated Damages for Breach',
+      sectionPath: 'Section 6 > Liquidated Damages for Breach',
+      rawText: 'In addition to injunctive relief, any disclosure in violation of Section 2 shall subject the Receiving Party to liquidated damages of Rs. 50,00,000/- (Rupees Fifty Lakhs) per incident, regardless of actual loss incurred.',
+      plainLanguageSummary: 'You face an automatic ₹50 Lakh fine for any disclosure, even accidental, regardless of whether any actual financial harm occurred.',
+      simplifiedReadabilityScore: 7.9,
+      riskLevel: 'critical',
+      riskCategory: 'penalty',
+      isStandardClause: false,
+      indianLawReference: 'Section 74, Indian Contract Act 1872 (Stipulation of penalty requires proof of actual damage)',
+      obligations: [],
+      rights: [],
+    },
+  ],
+  risks: [
+    {
+      id: 'r_nda_1',
+      clauseId: 'nda_c6',
+      clauseTitle: 'Liquidated Damages for Breach',
+      sectionPath: 'Section 6',
+      severity: 'critical',
+      category: 'penalty',
+      sourceQuote: 'subject the Receiving Party to liquidated damages of Rs. 50,00,000/- (Rupees Fifty Lakhs) per incident, regardless of actual loss incurred',
+      title: 'Severe ₹50 Lakh Penalty Without Proof of Actual Loss',
+      explanation: 'Under Indian law (Section 74 Contract Act), liquidated damages cannot serve as a punitive in terrorem penalty without reasonable pre-estimate of genuine damage.',
+      practicalImpact: 'Immediate exposure to a ₹50,00,000 claim even for minor inadvertent disclosures.',
+      recommendedAction: 'Remove fixed liquidated damages; replace with liability for actual, proven, direct compensatory losses only.',
+      suggestedNegotiationRedline: 'In the event of a material breach, the Receiving Party shall be liable only for direct, proven damages established in a court of competent jurisdiction.',
+      legalBasisOrJurisdictionNotice: 'Section 74 Indian Contract Act 1872; Kailash Nath Associates v. DDA (2015 Supreme Court).',
+    },
+    {
+      id: 'r_nda_2',
+      clauseId: 'nda_c5',
+      clauseTitle: 'Equitable Relief and Waiver of Bond',
+      sectionPath: 'Section 5',
+      severity: 'high',
+      category: 'liability',
+      sourceQuote: 'without the necessity of posting any bond or proof of actual financial damages',
+      title: 'Unilateral Injunction Without Security Bond',
+      explanation: 'Waives court requirement for the disclosing party to post security when seeking emergency injunctions.',
+      practicalImpact: 'Your ongoing commercial projects could be frozen ex-parte without financial safeguards.',
+      recommendedAction: 'Strike out "without the necessity of posting any bond".',
+    },
+  ],
+  summary: {
+    executiveSummary: 'This Mutual Non-Disclosure Agreement includes aggressive terms including a ₹50,00,000 liquidated damages clause per incident without requiring proof of loss, perpetual confidentiality on technical data, waiver of court injunction bonds, and coverage of oral disclosures without written confirmation. Key liability caps should be established before signing.',
+    overallRiskScore: 84,
+    overallRiskSeverity: 'critical',
+    totalClauses: 7,
+    criticalRisksCount: 2,
+    highRisksCount: 1,
+    mediumRisksCount: 1,
+    lowRisksCount: 0,
+    keyTerms: [
+      {
+        term: 'Liquidated Damages',
+        definedInClause: 'Section 6',
+        legalMeaning: 'A pre-set sum of money that must be paid as compensation upon breach.',
+        plainEnglishExplanation: 'An automatic pre-determined fine of ₹50 Lakhs.',
+        whyItMattersToYou: 'Enforces massive financial liability without proving real losses.',
+      },
+      {
+        term: 'Perpetual Survival',
+        definedInClause: 'Section 3',
+        legalMeaning: 'Obligations that continue indefinitely without an expiration date.',
+        plainEnglishExplanation: 'A secrecy duty that never ever ends.',
+        whyItMattersToYou: 'Creates permanent compliance baggage for your team.',
+      },
+    ],
+    obligationsSummary: {
+      userCount: 3,
+      counterpartyCount: 3,
+      topObligations: [],
+    },
+    checklist: [
+      {
+        id: 'chk_nda_1',
+        category: 'before_signing',
+        action: 'Delete Section 6 (Rs. 50 Lakh liquidated damages penalty).',
+        sourceSection: 'Section 6',
+        priority: 'must_do',
+        completed: false,
+      },
+      {
+        id: 'chk_nda_2',
+        category: 'before_signing',
+        action: 'Cap confidentiality duration to 3 years from disclosure date.',
+        sourceSection: 'Section 3',
+        priority: 'must_do',
+        completed: false,
+      },
+    ],
+    lawyerPrepGuide: [
+      {
+        id: 'lp_nda_1',
+        topic: 'Liquidated Damages in NDAs',
+        specificClauseReference: 'Section 6',
+        suggestedQuestion: 'How does Section 74 of the Indian Contract Act protect our firm if the counterparty attempts to enforce this ₹50 Lakh liquidated penalty?',
+        contextWhyAsk: 'To confirm that arbitrary penalties cannot be enforced without actual proof of damage.',
+        documentsToBring: ['Draft NDA Section 6'],
+        targetOutcome: 'Replacement with standard indemnification for proven direct losses.',
+      },
+    ],
+  },
+};
+
+export const SAMPLE_FREELANCE_AGREEMENT: LegalDocument = {
+  id: 'sample-freelance-msa-04',
+  name: 'Full_Stack_Freelance_Dev_Contract.pdf',
+  uploadedAt: new Date().toISOString(),
+  metadata: {
+    fileName: 'Full_Stack_Freelance_Dev_Contract.pdf',
+    fileSize: 37800,
+    fileType: 'pdf',
+    pageCount: 4,
+    wordCount: 1380,
+    characterCount: 8800,
+    detectedType: 'freelance_service_agreement',
+    jurisdictionHint: 'Republic of India (Commercial Courts Act / Indian Contract Act)',
+    parsedAt: new Date().toISOString(),
+  },
+  rawText: `INDEPENDENT CONTRACTOR SOFTWARE SERVICES AGREEMENT
+
+This Services Agreement is made between:
+HyperScale SaaS Technologies Inc. ("Client");
+AND
+Rohan Deshmukh ("Contractor / Developer").
+
+1. SCOPE AND DELIVERABLES
+Contractor shall develop and deliver a high-performance analytics microservice as specified in Statement of Work #1.
+
+2. PAYMENT TERMS AND 90-DAY MILESTONE HOLDBACK
+Client shall pay Contractor a fixed fee of Rs. 4,50,000/- across three milestones. Payment shall be made Net 90 days following final written acceptance by Client. Client reserves the right to retain 25% of the total project fee for a 6-month warranty period to cover post-deployment debugging.
+
+3. PRE-PAYMENT INTELLECTUAL PROPERTY ASSIGNMENT
+Contractor agrees that all source code, architecture, algorithms, and documentation created by Contractor shall be deemed "work made for hire" and all worldwide copyright, patent, and IP rights shall transfer and vest in Client immediately upon creation, irrespective of whether Client has paid the corresponding invoice.
+
+4. UNLIMITED CONTRACTOR INDEMNITY
+Contractor shall defend, indemnify, and hold harmless Client, its officers, partners, and customers from any third-party claims, legal fees, or damages arising out of open-source license violations, bugs, service downtime, or alleged copyright infringement.
+
+5. ASYMMETRIC LIMITATION OF LIABILITY
+Client's aggregate liability under this Agreement for any cause shall be strictly limited to the amount paid to Contractor in the 30 days preceding the claim. Contractor's liability to Client shall be completely uncapped and unlimited.
+
+6. TERMINATION FOR CONVENIENCE
+Client may terminate this Agreement at any time with 3 days notice without cause. Upon such termination, Contractor shall immediately deliver all code, and Client shall have no obligation to pay for incomplete or in-progress milestones.`,
+  clauses: [
+    {
+      id: 'fl_c2',
+      clauseNumber: '2',
+      title: 'Payment Terms & 90-Day Milestone Holdback',
+      sectionPath: 'Section 2 > Payment Terms',
+      rawText: 'Client shall pay Contractor a fixed fee of Rs. 4,50,000/- across three milestones. Payment shall be made Net 90 days following final written acceptance by Client. Client reserves the right to retain 25% of the total project fee for a 6-month warranty period to cover post-deployment debugging.',
+      plainLanguageSummary: 'You have to wait 3 full months after finishing work to get paid, and the client withholds 25% for 6 months.',
+      simplifiedReadabilityScore: 7.6,
+      riskLevel: 'high',
+      riskCategory: 'financial',
+      isStandardClause: false,
+      obligations: [],
+      rights: [],
+    },
+    {
+      id: 'fl_c3',
+      clauseNumber: '3',
+      title: 'Pre-Payment IP Assignment',
+      sectionPath: 'Section 3 > Intellectual Property',
+      rawText: 'Contractor agrees that all source code, architecture, algorithms, and documentation created by Contractor shall be deemed "work made for hire" and all worldwide copyright, patent, and IP rights shall transfer and vest in Client immediately upon creation, irrespective of whether Client has paid the corresponding invoice.',
+      plainLanguageSummary: 'The client owns your code the second you write it, even if they refuse to pay your invoice.',
+      simplifiedReadabilityScore: 8.1,
+      riskLevel: 'critical',
+      riskCategory: 'ip_rights',
+      isStandardClause: false,
+      obligations: [],
+      rights: [],
+    },
+    {
+      id: 'fl_c4',
+      clauseNumber: '4',
+      title: 'Unlimited Contractor Indemnity',
+      sectionPath: 'Section 4 > Indemnity',
+      rawText: 'Contractor shall defend, indemnify, and hold harmless Client, its officers, partners, and customers from any third-party claims, legal fees, or damages arising out of open-source license violations, bugs, service downtime, or alleged copyright infringement.',
+      plainLanguageSummary: 'You are personally on the hook to pay for client lawsuits and server downtime caused by software bugs.',
+      simplifiedReadabilityScore: 8.4,
+      riskLevel: 'critical',
+      riskCategory: 'liability',
+      isStandardClause: false,
+      obligations: [],
+      rights: [],
+    },
+    {
+      id: 'fl_c5',
+      clauseNumber: '5',
+      title: 'Asymmetric Limitation of Liability',
+      sectionPath: 'Section 5 > Limitation of Liability',
+      rawText: "Client's aggregate liability under this Agreement for any cause shall be strictly limited to the amount paid to Contractor in the 30 days preceding the claim. Contractor's liability to Client shall be completely uncapped and unlimited.",
+      plainLanguageSummary: 'If the client breaches, they pay virtually nothing; but if you make a mistake, your liability is infinite.',
+      simplifiedReadabilityScore: 7.9,
+      riskLevel: 'critical',
+      riskCategory: 'liability',
+      isStandardClause: false,
+      obligations: [],
+      rights: [],
+    },
+  ],
+  risks: [
+    {
+      id: 'r_fl_1',
+      clauseId: 'fl_c3',
+      clauseTitle: 'Pre-Payment IP Assignment',
+      sectionPath: 'Section 3',
+      severity: 'critical',
+      category: 'ip_rights',
+      sourceQuote: 'all worldwide copyright, patent, and IP rights shall transfer and vest in Client immediately upon creation, irrespective of whether Client has paid the corresponding invoice',
+      title: 'Pre-Payment IP Transfer: Client Owns Code Without Paying',
+      explanation: 'Standard contractor agreements strictly state that IP transfers only upon receipt of full payment in cleared funds.',
+      practicalImpact: 'If client defaults or ghosts you, you have no legal leverage to withhold the codebase.',
+      recommendedAction: 'Make IP transfer strictly contingent upon full receipt of payment.',
+      suggestedNegotiationRedline: 'All rights, title, and interest in deliverables shall transfer and vest in Client strictly upon full and final receipt of payment by Contractor.',
+    },
+    {
+      id: 'r_fl_2',
+      clauseId: 'fl_c5',
+      clauseTitle: 'Asymmetric Limitation of Liability',
+      sectionPath: 'Section 5',
+      severity: 'critical',
+      category: 'liability',
+      sourceQuote: "Contractor's liability to Client shall be completely uncapped and unlimited",
+      title: 'Uncapped Liability for a ₹4.5 Lakh Project',
+      explanation: 'Exposes an individual freelance developer to unlimited commercial damages.',
+      practicalImpact: 'A single bug could trigger commercial lawsuits exceeding total project fees.',
+      recommendedAction: 'Cap contractor liability to 100% of fees actually received under this SOW.',
+    },
+  ],
+  summary: {
+    executiveSummary: 'This freelance development contract contains predatory terms including IP assignment occurring prior to payment, uncapped personal liability for bugs, Net-90 payment terms with a 25% 6-month holdback, and termination on 3 days notice without WIP compensation. You should negotiate payment-contingent IP transfer and mutual liability caps.',
+    overallRiskScore: 89,
+    overallRiskSeverity: 'critical',
+    totalClauses: 6,
+    criticalRisksCount: 3,
+    highRisksCount: 1,
+    mediumRisksCount: 0,
+    lowRisksCount: 0,
+    keyTerms: [
+      {
+        term: 'Work Made for Hire',
+        definedInClause: 'Section 3',
+        legalMeaning: 'A doctrine where the contracting party is deemed the original legal author of the work.',
+        plainEnglishExplanation: 'You do not own your code from the moment you write it.',
+        whyItMattersToYou: 'Destroys developer leverage if the client delays or withholds payment.',
+      },
+      {
+        term: 'Limitation of Liability',
+        definedInClause: 'Section 5',
+        legalMeaning: 'A contractual cap on the maximum damages one party can recover.',
+        plainEnglishExplanation: 'A shield protecting the client while leaving you exposed.',
+        whyItMattersToYou: 'Protects the client up to 30 days of fees but leaves you with infinite liability.',
+      },
+    ],
+    obligationsSummary: {
+      userCount: 4,
+      counterpartyCount: 2,
+      topObligations: [],
+    },
+    checklist: [
+      {
+        id: 'chk_fl_1',
+        category: 'before_signing',
+        action: 'Amend Section 3: IP transfers only upon receipt of full payment.',
+        sourceSection: 'Section 3',
+        priority: 'must_do',
+        completed: false,
+      },
+      {
+        id: 'chk_fl_2',
+        category: 'before_signing',
+        action: 'Shorten payment window from Net 90 to Net 15 days.',
+        sourceSection: 'Section 2',
+        priority: 'must_do',
+        completed: false,
+      },
+    ],
+    lawyerPrepGuide: [
+      {
+        id: 'lp_fl_1',
+        topic: 'Conditioning IP Assignment on Payment',
+        specificClauseReference: 'Section 3',
+        suggestedQuestion: 'How can we rephrase Section 3 to ensure title remains with the freelancer until the bank confirms credit of the final milestone?',
+        contextWhyAsk: 'To prevent client from legally deploying our software while withholding our fees.',
+        documentsToBring: ['Freelance Agreement SOW #1'],
+        targetOutcome: 'Standard payment-contingent intellectual property covenant.',
+      },
+    ],
+  },
+};
+
+export const SAMPLE_INSURANCE_POLICY: LegalDocument = {
+  id: 'sample-insurance-policy-05',
+  name: 'CareShield_Family_Health_Policy_Terms.pdf',
+  uploadedAt: new Date().toISOString(),
+  metadata: {
+    fileName: 'CareShield_Family_Health_Policy_Terms.pdf',
+    fileSize: 44200,
+    fileType: 'pdf',
+    pageCount: 5,
+    wordCount: 1820,
+    characterCount: 11400,
+    detectedType: 'insurance_policy',
+    jurisdictionHint: 'Republic of India (IRDAI Health Insurance Regulations)',
+    parsedAt: new Date().toISOString(),
+  },
+  rawText: `CARESHIELD COMPREHENSIVE HEALTH INSURANCE POLICY
+
+Policy Schedule & Terms Issued By:
+National Care Health Insurance Co. Ltd.
+Policyholder: Rajesh Verma (Sum Insured: Rs. 10,00,000/-).
+
+1. PRE-EXISTING DISEASE (PED) WAITING PERIOD
+Any condition, ailment, or injury diagnosed within 48 months prior to the first policy inception shall not be covered until 36 continuous months of coverage have elapsed. Any failure to disclose even asymptomatic conditions shall render the policy void ab initio with forfeiture of all premiums paid.
+
+2. ROOM RENT SUB-LIMIT AND PROPORTIONATE DEDUCTIONS
+Normal Room Rent is capped at 1% of Sum Insured (Rs. 10,000/day) and ICU at 2% (Rs. 20,000/day). If the Insured occupies a room category higher than the eligible limit, all associated medical expenses including surgeon fees, OT charges, and consultation fees shall be subject to proportionate deduction penalty.
+
+3. MANDATORY 48-HOUR CLAIM NOTIFICATION
+For planned hospitalization, written intimation must be submitted at least 48 hours prior to admission. For emergency hospitalization, intimation must be given within 24 hours of admission. Failure to provide timely notice shall result in absolute forfeiture and rejection of the entire claim.
+
+4. MANDATORY 20% CO-PAYMENT
+A mandatory co-payment of 20% shall apply to all admissible claim amounts across all age groups and network hospitals, meaning the Insured must pay 20% of every approved medical bill out-of-pocket.
+
+5. EXCLUSIONS AND NON-PAYABLE CONSUMABLES
+All medical consumables, gloves, syringes, PPE kits, administrative charges, and robotic surgeries are strictly excluded from reimbursement.
+
+6. OMBUDSMAN & DISPUTE RESOLUTION
+Any grievance must first be filed with the Company Grievance Cell within 30 days. No dispute may be raised before the Insurance Ombudsman after the expiry of 12 months from the date of claim repudiation.`,
+  clauses: [
+    {
+      id: 'ins_c2',
+      clauseNumber: '2',
+      title: 'Room Rent Sub-Limit & Proportionate Deductions',
+      sectionPath: 'Section 2 > Room Rent Sub-Limit',
+      rawText: 'Normal Room Rent is capped at 1% of Sum Insured (Rs. 10,000/day) and ICU at 2% (Rs. 20,000/day). If the Insured occupies a room category higher than the eligible limit, all associated medical expenses including surgeon fees, OT charges, and consultation fees shall be subject to proportionate deduction penalty.',
+      plainLanguageSummary: 'If you take a private room costing just ₹1,000 above your limit, the insurer will slash your entire hospital bill (doctors, surgery, medicines) proportionately, costing you lakhs.',
+      simplifiedReadabilityScore: 7.9,
+      riskLevel: 'critical',
+      riskCategory: 'financial',
+      isStandardClause: false,
+      obligations: [],
+      rights: [],
+    },
+    {
+      id: 'ins_c3',
+      clauseNumber: '3',
+      title: 'Mandatory 48-Hour Claim Notification',
+      sectionPath: 'Section 3 > Claim Notification',
+      rawText: 'For planned hospitalization, written intimation must be submitted at least 48 hours prior to admission. For emergency hospitalization, intimation must be given within 24 hours of admission. Failure to provide timely notice shall result in absolute forfeiture and rejection of the entire claim.',
+      plainLanguageSummary: 'If an emergency strikes and your family informs the insurer 25 hours after admission instead of 24, they can completely reject your entire medical claim.',
+      simplifiedReadabilityScore: 7.5,
+      riskLevel: 'critical',
+      riskCategory: 'compliance',
+      isStandardClause: false,
+      obligations: [],
+      rights: [],
+    },
+    {
+      id: 'ins_c4',
+      clauseNumber: '4',
+      title: 'Mandatory 20% Co-Payment',
+      sectionPath: 'Section 4 > Co-Payment',
+      rawText: 'A mandatory co-payment of 20% shall apply to all admissible claim amounts across all age groups and network hospitals, meaning the Insured must pay 20% of every approved medical bill out-of-pocket.',
+      plainLanguageSummary: 'You are forced to pay 20% of every hospital bill out of your own pocket, even in network hospitals.',
+      simplifiedReadabilityScore: 7.1,
+      riskLevel: 'high',
+      riskCategory: 'financial',
+      isStandardClause: false,
+      obligations: [],
+      rights: [],
+    },
+  ],
+  risks: [
+    {
+      id: 'r_ins_1',
+      clauseId: 'ins_c2',
+      clauseTitle: 'Room Rent Sub-Limit & Proportionate Deductions',
+      sectionPath: 'Section 2',
+      severity: 'critical',
+      category: 'financial',
+      sourceQuote: 'all associated medical expenses including surgeon fees, OT charges, and consultation fees shall be subject to proportionate deduction penalty',
+      title: 'Proportionate Deduction Trap on Hospitalization',
+      explanation: 'Room rent sub-limits do not just limit room tariff; they penalize the entire claim proportionally if you exceed the room category.',
+      practicalImpact: 'On a ₹5,00,000 surgery, exceeding room rent by 20% can result in ₹1,50,000+ out-of-pocket deductions.',
+      recommendedAction: 'Opt for a policy with No Room Rent Capping, or never select a room above ₹10,000/day.',
+      legalBasisOrJurisdictionNotice: 'IRDAI Master Circular on Standardization of Health Insurance Contracts.',
+    },
+    {
+      id: 'r_ins_2',
+      clauseId: 'ins_c3',
+      clauseTitle: 'Mandatory 48-Hour Claim Notification',
+      sectionPath: 'Section 3',
+      severity: 'critical',
+      category: 'compliance',
+      sourceQuote: 'Failure to provide timely notice shall result in absolute forfeiture and rejection of the entire claim',
+      title: 'Automatic Claim Repudiation for Notice Delay',
+      explanation: 'IRDAI regulations prohibit insurers from rejecting genuine claims solely on grounds of delayed notification when genuine distress exists.',
+      practicalImpact: 'Risk of having legitimate emergency hospital expenses rejected outright.',
+      recommendedAction: 'Negotiate removal of forfeiture condition; cite IRDAI circular on genuine delay condonation.',
+      legalBasisOrJurisdictionNotice: 'IRDAI Circular Ref: IRDA/HLTH/MISC/CIR/216/09/2011 (Claims cannot be rejected solely on technical delays).',
+    },
+  ],
+  summary: {
+    executiveSummary: 'This health insurance policy includes significant consumer financial traps: a proportionate deduction penalty on room rent capping, an arbitrary 24/48-hour claim notification forfeiture rule (prohibited by IRDAI guidance), and a 20% mandatory out-of-pocket co-payment. Consumers should be alert to these deductions before hospital admission.',
+    overallRiskScore: 81,
+    overallRiskSeverity: 'critical',
+    totalClauses: 6,
+    criticalRisksCount: 2,
+    highRisksCount: 1,
+    mediumRisksCount: 0,
+    lowRisksCount: 0,
+    keyTerms: [
+      {
+        term: 'Proportionate Deduction',
+        definedInClause: 'Section 2',
+        legalMeaning: 'A penalty reduction applied to doctor, surgery, and OT costs proportional to the room tariff excess.',
+        plainEnglishExplanation: 'A formula that cuts your entire hospital payout if you pick a slightly nicer room.',
+        whyItMattersToYou: 'Can turn a ₹5 Lakh coverage into a ₹2.5 Lakh out-of-pocket surprise.',
+      },
+      {
+        term: 'Co-Payment',
+        definedInClause: 'Section 4',
+        legalMeaning: 'A cost-sharing requirement where the insured pays a fixed percentage of admissible costs.',
+        plainEnglishExplanation: 'You pay 20% of every medical bill yourself.',
+        whyItMattersToYou: 'Guarantees you never receive 100% reimbursement.',
+      },
+    ],
+    obligationsSummary: {
+      userCount: 4,
+      counterpartyCount: 2,
+      topObligations: [],
+    },
+    checklist: [
+      {
+        id: 'chk_ins_1',
+        category: 'before_signing',
+        action: 'Inquire whether a waiver rider exists to eliminate the 1% room rent sub-limit.',
+        sourceSection: 'Section 2',
+        priority: 'must_do',
+        completed: false,
+      },
+      {
+        id: 'chk_ins_2',
+        category: 'during_term',
+        action: 'Save TPA emergency WhatsApp number in family phones to ensure intimation within 24 hours.',
+        sourceSection: 'Section 3',
+        priority: 'must_do',
+        completed: false,
+      },
+    ],
+    lawyerPrepGuide: [
+      {
+        id: 'lp_ins_1',
+        topic: 'IRDAI Protection on Technical Notice Delays',
+        specificClauseReference: 'Section 3',
+        suggestedQuestion: 'If an emergency prevents notification within 24 hours, how does the IRDAI 2011 Circular protect us from claim repudiation?',
+        contextWhyAsk: 'To challenge insurer attempts to repudiate emergency hospitalization.',
+        documentsToBring: ['Policy Schedule', 'Hospital Admission Record'],
+        targetOutcome: 'Formal legal demand letter citing IRDAI guidelines for claim revival.',
+      },
+    ],
+  },
+};
+
+export const SAMPLE_LOAN_AGREEMENT: LegalDocument = {
+  id: 'sample-loan-agreement-06',
+  name: 'SME_Working_Capital_Loan_Sanction.pdf',
+  uploadedAt: new Date().toISOString(),
+  metadata: {
+    fileName: 'SME_Working_Capital_Loan_Sanction.pdf',
+    fileSize: 42100,
+    fileType: 'pdf',
+    pageCount: 5,
+    wordCount: 1650,
+    characterCount: 10200,
+    detectedType: 'loan_agreement',
+    jurisdictionHint: 'Republic of India (Reserve Bank of India Fair Practices Code)',
+    parsedAt: new Date().toISOString(),
+  },
+  rawText: `SECURED SME WORKING CAPITAL CREDIT FACILITY AGREEMENT
+
+Lender: Pinnacle Capital & Finance NBFC Ltd.
+Borrower: Quantum Precision Engineering Pvt. Ltd. & Promoters (Guarantors).
+Facility Amount: Rs. 25,00,000/- (Rupees Twenty-Five Lakhs).
+
+1. DISBURSAL AND FLOATING INTEREST
+Interest shall be charged at a benchmark floating rate of 14.5% per annum, reset monthly at the sole discretion of the Lender without prior borrower consent.
+
+2. PENAL COMPOUND INTEREST ON TECHNICAL DEFAULT
+Any delay in payment of interest or installment, or failure to submit quarterly financial statements within 15 days of quarter-end, shall constitute a Default Event attracting penal interest of 24% per annum compounded monthly on the entire outstanding balance.
+
+3. ACCELERATION AND IMMEDIATE RECALL
+Upon the occurrence of any event which in the sole opinion of the Lender may adversely affect the financial viability of the Borrower, the Lender may declare the entire outstanding principal immediately due and payable within 48 hours.
+
+4. UNCONDITIONAL PERSONAL GUARANTEE & NEGATIVE LIEN
+The Promoters and Directors hereby irrevocably and personally guarantee repayment. A negative lien is created over all personal bank accounts, residential properties, and ancestral assets of the Promoters, present and future.
+
+5. PREPAYMENT FORECLOSURE CHARGE
+If Borrower repays the facility prior to maturity from any source including internal business profits, Borrower shall pay a foreclosure penalty of 5% on the original sanctioned limit plus applicable GST.
+
+6. POWER OF ATTORNEY AND DIRECT RECOVERY
+Borrower irrevocably appoints Lender as its attorney to execute debits on any bank account maintained by Borrower or Guarantor, without requiring prior judicial process or arbitration.`,
+  clauses: [
+    {
+      id: 'loan_c2',
+      clauseNumber: '2',
+      title: 'Penal Compound Interest on Technical Default',
+      sectionPath: 'Section 2 > Penal Interest',
+      rawText: 'Any delay in payment of interest or installment, or failure to submit quarterly financial statements within 15 days of quarter-end, shall constitute a Default Event attracting penal interest of 24% per annum compounded monthly on the entire outstanding balance.',
+      plainLanguageSummary: 'If you are late on quarterly reporting paperwork, your loan interest shoots up to an astronomical 24% compounded monthly on the entire ₹25 Lakh balance.',
+      simplifiedReadabilityScore: 8.3,
+      riskLevel: 'critical',
+      riskCategory: 'financial',
+      isStandardClause: false,
+      obligations: [],
+      rights: [],
+    },
+    {
+      id: 'loan_c3',
+      clauseNumber: '3',
+      title: 'Subjective Acceleration & 48-Hour Recall',
+      sectionPath: 'Section 3 > Acceleration and Recall',
+      rawText: 'Upon the occurrence of any event which in the sole opinion of the Lender may adversely affect the financial viability of the Borrower, the Lender may declare the entire outstanding principal immediately due and payable within 48 hours.',
+      plainLanguageSummary: 'If the lender subjectively feels nervous about your industry, they can demand you pay back all ₹25 Lakhs within 48 hours.',
+      simplifiedReadabilityScore: 8.6,
+      riskLevel: 'critical',
+      riskCategory: 'termination',
+      isStandardClause: false,
+      obligations: [],
+      rights: [],
+    },
+    {
+      id: 'loan_c4',
+      clauseNumber: '4',
+      title: 'Unconditional Personal Guarantee & Ancestral Asset Lien',
+      sectionPath: 'Section 4 > Guarantee & Negative Lien',
+      rawText: 'The Promoters and Directors hereby irrevocably and personally guarantee repayment. A negative lien is created over all personal bank accounts, residential properties, and ancestral assets of the Promoters, present and future.',
+      plainLanguageSummary: 'You are personally putting your family home, personal savings, and ancestral property on the line for the business loan.',
+      simplifiedReadabilityScore: 8.0,
+      riskLevel: 'high',
+      riskCategory: 'liability',
+      isStandardClause: false,
+      obligations: [],
+      rights: [],
+    },
+    {
+      id: 'loan_c5',
+      clauseNumber: '5',
+      title: 'Prepayment Foreclosure Charge',
+      sectionPath: 'Section 5 > Prepayment Penalty',
+      rawText: 'If Borrower repays the facility prior to maturity from any source including internal business profits, Borrower shall pay a foreclosure penalty of 5% on the original sanctioned limit plus applicable GST.',
+      plainLanguageSummary: 'If your business succeeds and you want to pay off the loan early, you are hit with a ₹1.25 Lakh penalty fee.',
+      simplifiedReadabilityScore: 7.7,
+      riskLevel: 'high',
+      riskCategory: 'penalty',
+      isStandardClause: false,
+      obligations: [],
+      rights: [],
+    },
+  ],
+  risks: [
+    {
+      id: 'r_loan_1',
+      clauseId: 'loan_c3',
+      clauseTitle: 'Subjective Acceleration & 48-Hour Recall',
+      sectionPath: 'Section 3',
+      severity: 'critical',
+      category: 'termination',
+      sourceQuote: 'declare the entire outstanding principal immediately due and payable within 48 hours',
+      title: '48-Hour Subjective Loan Acceleration',
+      explanation: 'Allows lender to call back the entire loan based on subjective belief without objective payment default.',
+      practicalImpact: 'Can push a solvent SME into sudden insolvency within 2 days.',
+      recommendedAction: 'Restrict acceleration strictly to monetary payment defaults after a 30-day cure period.',
+    },
+    {
+      id: 'r_loan_2',
+      clauseId: 'loan_c2',
+      clauseTitle: 'Penal Compound Interest on Technical Default',
+      sectionPath: 'Section 2',
+      severity: 'critical',
+      category: 'financial',
+      sourceQuote: 'penal interest of 24% per annum compounded monthly on the entire outstanding balance',
+      title: 'Excessive 24% Compound Penal Interest',
+      explanation: 'Compounding penal interest violates RBI guidelines on Fair Lending Practices.',
+      practicalImpact: 'Debt spirals exponentially upon minor administrative filing delays.',
+      recommendedAction: 'Replace compound penal interest with simple interest penal charges strictly on the overdue amount, not on the total loan.',
+      legalBasisOrJurisdictionNotice: 'RBI Master Direction on Fair Practices Code / Penal Charges in Loan Accounts (2023).',
+    },
+  ],
+  summary: {
+    executiveSummary: 'This SME working capital facility features oppressive borrowing terms: subjective 48-hour loan acceleration, compounding 24% penal interest on technical paperwork delays (contrary to RBI fair lending directions), a blanket lien on ancestral assets, and a 5% prepayment penalty. Borrowers should mandate a 30-day cure period for defaults.',
+    overallRiskScore: 92,
+    overallRiskSeverity: 'critical',
+    totalClauses: 6,
+    criticalRisksCount: 2,
+    highRisksCount: 2,
+    mediumRisksCount: 0,
+    lowRisksCount: 0,
+    keyTerms: [
+      {
+        term: 'Acceleration Clause',
+        definedInClause: 'Section 3',
+        legalMeaning: 'A provision allowing the lender to demand immediate repayment of the entire loan balance.',
+        plainEnglishExplanation: 'The bank forces you to pay all ₹25 Lakhs back right now.',
+        whyItMattersToYou: 'Can instantly bankrupt a business if triggered unexpectedly.',
+      },
+      {
+        term: 'Penal Interest',
+        definedInClause: 'Section 2',
+        legalMeaning: 'An elevated punitive interest rate charged during periods of contractual default.',
+        plainEnglishExplanation: 'A punitive 24% interest penalty on top of normal loan interest.',
+        whyItMattersToYou: 'Quickly balloons debt out of control.',
+      },
+    ],
+    obligationsSummary: {
+      userCount: 5,
+      counterpartyCount: 1,
+      topObligations: [],
+    },
+    checklist: [
+      {
+        id: 'chk_loan_1',
+        category: 'before_signing',
+        action: 'Mandate 30 days written notice before acceleration can be declared.',
+        sourceSection: 'Section 3',
+        priority: 'must_do',
+        completed: false,
+      },
+      {
+        id: 'chk_loan_2',
+        category: 'before_signing',
+        action: 'Require penal charges to be simple interest charged strictly on overdue sums per RBI norms.',
+        sourceSection: 'Section 2',
+        priority: 'must_do',
+        completed: false,
+      },
+    ],
+    lawyerPrepGuide: [
+      {
+        id: 'lp_loan_1',
+        topic: 'RBI Guidelines on Penal Charges in Loan Accounts',
+        specificClauseReference: 'Section 2',
+        suggestedQuestion: 'How does the RBI August 2023 circular on Fair Lending Practices protect us against Section 2 compounding penal interest?',
+        contextWhyAsk: 'To mandate that the NBFC removes compounding on penal interest.',
+        documentsToBring: ['Sanction Letter', 'Facility Agreement Section 2'],
+        targetOutcome: 'Restructuring penal charges as separate simple fees.',
+      },
+    ],
+  },
+};
+
+export const ALL_SAMPLE_DOCUMENTS: LegalDocument[] = [
+  SAMPLE_RENTAL_AGREEMENT,
+  SAMPLE_EMPLOYMENT_CONTRACT,
+  SAMPLE_NDA,
+  SAMPLE_FREELANCE_AGREEMENT,
+  SAMPLE_INSURANCE_POLICY,
+  SAMPLE_LOAN_AGREEMENT,
+];
+

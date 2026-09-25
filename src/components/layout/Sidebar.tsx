@@ -105,7 +105,7 @@ export function Sidebar({
       <div className="p-3 border-t border-slate-100 dark:border-slate-800 space-y-2">
         <div className="px-3 text-[11px] font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1">
           <Sparkles className="w-3 h-3 text-amber-500" />
-          <span>Quick Sample Demos</span>
+          <span>Demo Domains (6 Contracts)</span>
         </div>
         <div className="grid grid-cols-2 gap-1.5 px-1">
           <button
@@ -131,6 +131,54 @@ export function Sidebar({
             title="Load Tech Employment Offer Sample"
           >
             💼 Tech Offer
+          </button>
+          <button
+            onClick={() => loadSampleDocument('nda')}
+            className={clsx(
+              'px-2 py-1.5 text-[11px] text-left rounded-lg border transition-all truncate',
+              activeDocument?.id === 'sample-nda-03'
+                ? 'bg-blue-50 dark:bg-blue-950/50 border-blue-300 dark:border-blue-800 text-blue-700 dark:text-blue-300 font-medium'
+                : 'border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400',
+            )}
+            title="Load Mutual Non-Disclosure Agreement Sample"
+          >
+            🔒 Mutual NDA
+          </button>
+          <button
+            onClick={() => loadSampleDocument('freelance')}
+            className={clsx(
+              'px-2 py-1.5 text-[11px] text-left rounded-lg border transition-all truncate',
+              activeDocument?.id === 'sample-freelance-msa-04'
+                ? 'bg-blue-50 dark:bg-blue-950/50 border-blue-300 dark:border-blue-800 text-blue-700 dark:text-blue-300 font-medium'
+                : 'border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400',
+            )}
+            title="Load Freelance SaaS Services Agreement Sample"
+          >
+            💻 Freelance Dev
+          </button>
+          <button
+            onClick={() => loadSampleDocument('insurance')}
+            className={clsx(
+              'px-2 py-1.5 text-[11px] text-left rounded-lg border transition-all truncate',
+              activeDocument?.id === 'sample-insurance-policy-05'
+                ? 'bg-blue-50 dark:bg-blue-950/50 border-blue-300 dark:border-blue-800 text-blue-700 dark:text-blue-300 font-medium'
+                : 'border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400',
+            )}
+            title="Load Health Insurance Policy Terms Sample"
+          >
+            🛡️ Insurance
+          </button>
+          <button
+            onClick={() => loadSampleDocument('loan')}
+            className={clsx(
+              'px-2 py-1.5 text-[11px] text-left rounded-lg border transition-all truncate',
+              activeDocument?.id === 'sample-loan-agreement-06'
+                ? 'bg-blue-50 dark:bg-blue-950/50 border-blue-300 dark:border-blue-800 text-blue-700 dark:text-blue-300 font-medium'
+                : 'border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400',
+            )}
+            title="Load SME Commercial Loan Sanction Sample"
+          >
+            💰 SME Loan
           </button>
         </div>
 
