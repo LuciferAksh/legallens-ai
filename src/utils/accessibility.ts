@@ -7,7 +7,7 @@ let liveRegion: HTMLElement | null = null;
 export function announceToScreenReader(message: string, priority: 'polite' | 'assertive' = 'polite') {
   if (typeof document === 'undefined') return;
 
-  if (!liveRegion) {
+  if (!liveRegion || !document.body.contains(liveRegion)) {
     liveRegion = document.createElement('div');
     liveRegion.id = 'a11y-live-region';
     liveRegion.setAttribute('aria-live', priority);

@@ -16,11 +16,13 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom', 'zustand'],
+          vendor: ['react', 'react-dom', 'zustand'],
           icons: ['lucide-react'],
+          parsers: ['mammoth'],
         },
       },
     },
+    chunkSizeWarningLimit: 800,
   },
   server: {
     port: 3000,
