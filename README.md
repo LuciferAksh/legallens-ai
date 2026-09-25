@@ -4,8 +4,9 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue.svg)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-6.1-purple.svg)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-cyan.svg)](https://tailwindcss.com/)
-[![Tests Passing](https://img.shields.io/badge/Tests-73%20Passed-emerald.svg)](https://vitest.dev/)
+[![Tests Passing](https://img.shields.io/badge/Tests-81%20Passed-emerald.svg)](https://vitest.dev/)
 [![ESLint 9](https://img.shields.io/badge/ESLint-0%20warnings-green.svg)](https://eslint.org/)
+[![Security Policy](https://img.shields.io/badge/Security-Hardened%20(CSP%20%2B%20Prompt%20Shield)-blue.svg)](./SECURITY.md)
 [![Loop Engineering](https://img.shields.io/badge/Loop%20Engineering-Active-9333ea.svg)](https://github.com/LuciferAksh/legallens-ai)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -62,10 +63,10 @@ flowchart LR
 | Parameter | Impact | Our Architectural Implementation |
 |---|---|---|
 | **Problem Statement Alignment** | 🔴 **High** | 100% aligned with all 7 hackathon directions; features full Indian legal jurisdiction context, lawyer prep brief, and ethical disclaimers. |
-| **Code Quality** | 🔴 **High** | Strict TypeScript throughout, SOLID architecture (Services / Hooks / Stores / UI), zero type errors (`tsc --noEmit` clean). |
-| **Security** | 🟡 **Medium** | Strict file validation (magic bytes, size caps, extension checks), anti-XSS sanitization, in-memory API key storage, Content Security Policy (CSP). |
-| **Efficiency** | 🟡 **Medium** | Streaming generation, route code-splitting, memoized diff algorithms, client-side caching, throttled requests. |
-| **Testing** | 🟢 **Low (Targeted)** | **22 test suites with 73 automated unit & component tests** passing via Vitest, achieving over 90% coverage in core domain logic. |
+| **Code Quality** | 🔴 **High** | Strict TypeScript throughout, SOLID architecture documented in [`ARCHITECTURE.md`](./ARCHITECTURE.md), zero type errors (`tsc --noEmit` clean). |
+| **Security** | 🟡 **Medium** | Formally documented in [`SECURITY.md`](./SECURITY.md): Prompt Injection & Jailbreak Defense (`securitySanitizer.ts`), boundary tag isolation, magic bytes validation, DOMPurify XSS protection, zero server-side storage, and strict CSP (`vercel.json`). |
+| **Efficiency** | 🟡 **Medium** | Route-level code splitting via `React.lazy()` / `<Suspense>`, deterministic content-hash analysis caching (`analysisCache.ts`), streaming token rendering, and immutable asset headers. |
+| **Testing** | 🟢 **Low (Targeted)** | **24 test suites with 81 automated unit & component tests** passing via Vitest, achieving over 90% coverage in core domain logic. |
 | **Accessibility (WCAG 2.1 AA)** | 🟢 **Low (Targeted)** | High contrast dark/light themes, keyboard navigation (`useKeyboardNavigation`), ARIA live regions for screen readers, and skip links. |
 
 ---
@@ -124,7 +125,7 @@ Open your browser at `http://localhost:3000`.
 Run the comprehensive automated test suite:
 
 ```bash
-# Run all 73 unit & component tests across 22 test suites
+# Run all 81 unit & component tests across 24 test suites
 npm test
 
 # Run tests with code coverage report

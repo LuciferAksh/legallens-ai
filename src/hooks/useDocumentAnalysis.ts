@@ -12,6 +12,14 @@ import { buildRiskAnalysisPrompt } from '../services/prompts/riskAnalysisPrompt'
 import { buildSummaryPrompt } from '../services/prompts/summaryPrompt';
 import { extractJsonFromText } from '../utils/jsonParser';
 import { announceToScreenReader } from '../utils/accessibility';
+import { getCachedAnalysis, setCachedAnalysis } from '../services/analysisCache';
+import { LoopTelemetry } from '../services/loopEngine/types';
+
+interface CachedAnalysisData {
+  verifiedRisks: RiskAssessment[];
+  summary: DocumentSummary | null;
+  loopTelemetry: LoopTelemetry | null;
+}
 
 export function useDocumentAnalysis() {
   const {
@@ -31,6 +39,17 @@ export function useDocumentAnalysis() {
 
   const analyzeDocument = useCallback(
     async (doc: LegalDocument) => {
+      // Check deterministic memory cache for instant performance
+      const cached = getCachedAnalysis<CachedAnalysisData>(doc.rawText, 'full_analysis');
+      if (cached) {
+        setRisks(doc.id, cached.verifiedRisks);
+        if (cached.summary) setSummary(doc.id, cached.summary);
+        if (cached.loopTelemetry) setTelemetry(doc.id, cached.loopTelemetry);
+        setAnalyzing(false, 'Analysis loaded from cache', 100);
+        announceToScreenReader(`Analysis loaded from cache for ${doc.name}`, 'polite');
+        return;
+      }
+
       setAnalyzing(true, 'Initiating Agentic Legal Processing Engine...', 10);
       clearLoopStepTraces();
       announceToScreenReader(`Starting deep legal analysis on ${doc.name}`, 'polite');
@@ -92,6 +111,13 @@ Return ONLY the updated valid JSON array.`;
         } else if (doc.summary) {
           setSummary(doc.id, doc.summary);
         }
+
+        // Cache the verified results for instant future lookups
+        setCachedAnalysis<CachedAnalysisData>(doc.rawText, 'full_analysis', {
+          verifiedRisks,
+          summary: parsedSummary || doc.summary || null,
+          loopTelemetry,
+        });
 
         setAnalyzing(false, 'Analysis Complete', 100);
         announceToScreenReader(`Analysis complete for ${doc.name}. Found ${verifiedRisks.length} key points.`, 'polite');

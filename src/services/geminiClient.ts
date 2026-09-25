@@ -8,6 +8,7 @@
 import { APP_CONFIG } from '../constants';
 import { StreamCallbacks, GenerationMetrics } from '../types/api';
 import { ALL_SAMPLE_DOCUMENTS } from '../constants/sampleDocuments';
+import { sanitizePromptInput } from './securitySanitizer';
 
 class GeminiClientService {
   private apiKey: string = '';
@@ -70,10 +71,11 @@ class GeminiClientService {
     },
   ): Promise<{ text: string; metrics: GenerationMetrics }> {
     const startTime = performance.now();
+    const { sanitizedText } = sanitizePromptInput(prompt);
 
     // If no API key is provided, execute simulated intelligent response
     if (!this.hasApiKey()) {
-      return this.generateSimulatedResponse(prompt, startTime);
+      return this.generateSimulatedResponse(sanitizedText, startTime);
     }
 
     const retries = options?.maxRetries ?? 2;
@@ -89,7 +91,7 @@ class GeminiClientService {
           contents: [
             {
               role: 'user',
-              parts: [{ text: prompt }],
+              parts: [{ text: sanitizedText }],
             },
           ],
           generationConfig: {
@@ -141,14 +143,14 @@ class GeminiClientService {
       } catch (err) {
         if (attempt === retries) {
           console.warn('Gemini request failed, falling back to intelligent simulation:', err);
-          return this.generateSimulatedResponse(prompt, startTime);
+          return this.generateSimulatedResponse(sanitizedText, startTime);
         }
         await new Promise((r) => setTimeout(r, delay));
         delay *= 2;
       }
     }
 
-    return this.generateSimulatedResponse(prompt, startTime);
+    return this.generateSimulatedResponse(sanitizedText, startTime);
   }
 
   /**
@@ -159,8 +161,10 @@ class GeminiClientService {
     callbacks: StreamCallbacks,
     options?: { systemInstruction?: string },
   ): Promise<void> {
+    const { sanitizedText } = sanitizePromptInput(prompt);
+
     if (!this.hasApiKey()) {
-      return this.simulateStreamingResponse(prompt, callbacks);
+      return this.simulateStreamingResponse(sanitizedText, callbacks);
     }
 
     try {
@@ -170,7 +174,7 @@ class GeminiClientService {
         contents: [
           {
             role: 'user',
-            parts: [{ text: prompt }],
+            parts: [{ text: sanitizedText }],
           },
         ],
         generationConfig: {
