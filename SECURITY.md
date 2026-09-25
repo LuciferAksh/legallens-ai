@@ -17,9 +17,10 @@ When processing untrusted user documents through Large Language Models, prompt i
   - Delimiter escaping and script injection (`<script>`, `<iframe>`, `javascript:`)
 - **Strict Output Schema Validation:** All Gemini model responses are constrained by rigid JSON schemas and validated through safe parsers (`src/utils/jsonParser.ts`). Malformed or out-of-spec payloads are quarantined immediately.
 
-### 2. Client-Side Cryptographic Data Privacy
+### 2. Client-Side Cryptographic Data Privacy & Credential Security
 - **Zero Server-Side Storage:** Legal documents (PDF, DOCX, TXT) are read into client-side ArrayBuffers and processed in browser memory. No text is saved to remote databases.
-- **Ephemeral Key Handling:** User-provided Google AI Studio API keys are maintained strictly in ephemeral application state (or session-isolated memory) and are never logged to `console`, telemetry logs, or external analytics.
+- **Header-Based Authentication (No URL Leaks):** API keys are passed exclusively via the `x-goog-api-key` HTTP header rather than query parameters, preventing credentials from appearing in browser history, proxy logs, or Referer headers.
+- **Ephemeral Session Isolation:** Keys are stored in `sessionStorage` (cleared automatically upon closing the session/tab) and never persisted unencrypted to long-term storage or exposed in telemetry.
 - **No Telemetry Leakage:** The Loop Engineering Telemetry Inspector operates purely in-memory within the local user session.
 
 ### 3. File Validation & Upload Security
@@ -29,10 +30,9 @@ When processing untrusted user documents through Large Language Models, prompt i
 
 ### 4. HTTP Security Headers & Production Hardening
 The production deployment configuration (`vercel.json`) enforces enterprise-grade security headers:
-- `Content-Security-Policy`: Restricts scripts, styles, fonts, frames, and API connections exclusively to authorized origins (`generativelanguage.googleapis.com`).
+- `Content-Security-Policy`: Full specification allowing verified script execution, Google Fonts, and dedicated `worker-src` and `blob:` directives for secure in-browser PDF parsing.
 - `X-Frame-Options: DENY`: Prevents clickjacking and framing attacks.
 - `X-Content-Type-Options: nosniff`: Prevents MIME-type confusion attacks.
-- `X-XSS-Protection: 1; mode=block`: Enables browser XSS filtering.
 - `Referrer-Policy: strict-origin-when-cross-origin`: Minimizes referrer leakage.
 - `Permissions-Policy`: Completely disables camera, microphone, geolocation, and browsing-topics APIs.
 

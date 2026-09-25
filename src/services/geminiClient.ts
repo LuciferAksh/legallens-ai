@@ -22,12 +22,12 @@ class GeminiClientService {
     if (envKey) {
       this.apiKey = envKey;
     } else {
-      // Check localStorage for previously saved session key
+      // Check ephemeral sessionStorage (cleared when browser session ends)
       try {
-        const saved = localStorage.getItem(APP_CONFIG.STORAGE_KEYS.API_KEY);
+        const saved = sessionStorage.getItem(APP_CONFIG.STORAGE_KEYS.API_KEY);
         if (saved) this.apiKey = saved;
       } catch {
-        // Ignore localStorage error in private mode
+        // Ignore storage errors in private browsing modes
       }
     }
   }
@@ -36,7 +36,13 @@ class GeminiClientService {
     this.apiKey = key.trim();
     if (persist) {
       try {
-        localStorage.setItem(APP_CONFIG.STORAGE_KEYS.API_KEY, this.apiKey);
+        sessionStorage.setItem(APP_CONFIG.STORAGE_KEYS.API_KEY, this.apiKey);
+      } catch {
+        // ignore
+      }
+    } else {
+      try {
+        sessionStorage.removeItem(APP_CONFIG.STORAGE_KEYS.API_KEY);
       } catch {
         // ignore
       }
@@ -85,7 +91,7 @@ class GeminiClientService {
       try {
         await this.throttle();
 
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/${this.model}:generateContent?key=${this.apiKey}`;
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${this.model}:generateContent`;
 
         const payload: Record<string, unknown> = {
           contents: [
@@ -108,7 +114,10 @@ class GeminiClientService {
 
         const response = await fetch(url, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            'x-goog-api-key': this.apiKey,
+          },
           body: JSON.stringify(payload),
         });
 
@@ -168,7 +177,7 @@ class GeminiClientService {
     }
 
     try {
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${this.model}:streamGenerateContent?alt=sse&key=${this.apiKey}`;
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${this.model}:streamGenerateContent?alt=sse`;
 
       const payload: Record<string, unknown> = {
         contents: [
@@ -191,7 +200,10 @@ class GeminiClientService {
 
       const response = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-goog-api-key': this.apiKey,
+        },
         body: JSON.stringify(payload),
       });
 

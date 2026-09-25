@@ -4,14 +4,14 @@
  */
 
 const INJECTION_PATTERNS = [
-  /ignore\s+(all\s+)?(previous|above|prior)\s+(instructions|prompts|directions)/i,
-  /disregard\s+(all\s+)?(previous|above|prior)\s+(instructions|prompts|directions)/i,
-  /you\s+are\s+now\s+(an?\s+)?(unrestricted|dan|jailbroken)/i,
-  /system\s+prompt\s+(override|leak|reveal|output|exfiltrate)/i,
-  /repeat\s+(everything|the\s+instructions)\s+above/i,
+  /ignore\s+(?:all\s+)?(?:previous|above|prior)\s+(?:instructions|prompts|directions)/i,
+  /disregard\s+(?:all\s+)?(?:previous|above|prior)\s+(?:instructions|prompts|directions)/i,
+  /you\s+are\s+now\s+(?:an?\s+)?(?:unrestricted|dan|jailbroken)/i,
+  /system\s+prompt\s+(?:override|leak|reveal|output|exfiltrate)/i,
+  /repeat\s+(?:everything|the\s+instructions)\s+above/i,
   /as\s+an\s+ai\s+without\s+rules/i,
-  /jailbreak/i,
-  /<script[\s\S]*?>[\s\S]*?<\/script>/gi,
+  /\bjailbreak\b/i,
+  /<script\b[^>]*>[\s\S]*?<\/script>/gi,
   /javascript\s*:/gi,
   /<\/untrusted_legal_document_boundary>/gi,
 ];
