@@ -4,8 +4,9 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue.svg)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-6.1-purple.svg)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-cyan.svg)](https://tailwindcss.com/)
-[![Tests Passing](https://img.shields.io/badge/Tests-58%20Passed-emerald.svg)](https://vitest.dev/)
-[![Loop Engineering](https://img.shields.io/badge/Loop%20Engineering-Active-9333ea.svg)](https://github.com)
+[![Tests Passing](https://img.shields.io/badge/Tests-73%20Passed-emerald.svg)](https://vitest.dev/)
+[![ESLint 9](https://img.shields.io/badge/ESLint-0%20warnings-green.svg)](https://eslint.org/)
+[![Loop Engineering](https://img.shields.io/badge/Loop%20Engineering-Active-9333ea.svg)](https://github.com/LuciferAksh/legallens-ai)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 > **Built for Prompt Wars Exclusive Edition: AI for Legal Assistance & Access**  
@@ -64,8 +65,21 @@ flowchart LR
 | **Code Quality** | 🔴 **High** | Strict TypeScript throughout, SOLID architecture (Services / Hooks / Stores / UI), zero type errors (`tsc --noEmit` clean). |
 | **Security** | 🟡 **Medium** | Strict file validation (magic bytes, size caps, extension checks), anti-XSS sanitization, in-memory API key storage, Content Security Policy (CSP). |
 | **Efficiency** | 🟡 **Medium** | Streaming generation, route code-splitting, memoized diff algorithms, client-side caching, throttled requests. |
-| **Testing** | 🟢 **Low (Targeted)** | **18 test suites with 58 automated unit & component tests** passing via Vitest, achieving over 90% coverage in core domain logic. |
+| **Testing** | 🟢 **Low (Targeted)** | **22 test suites with 73 automated unit & component tests** passing via Vitest, achieving over 90% coverage in core domain logic. |
 | **Accessibility (WCAG 2.1 AA)** | 🟢 **Low (Targeted)** | High contrast dark/light themes, keyboard navigation (`useKeyboardNavigation`), ARIA live regions for screen readers, and skip links. |
+
+---
+
+## 📚 Multi-Domain Pre-loaded Contract Library
+
+LegalLens supports comprehensive analysis across any user-uploaded legal document, pre-seeded with 6 deep multi-domain contracts:
+
+1. 🏠 **Residential Tenancy Agreement** (Security deposit forfeiture, 15% annual rent escalations, unilateral inspection).
+2. 💼 **Software Engineer Employment Offer** (Perpetual worldwide non-compete, post-termination IP assignment, unilateral clawbacks).
+3. 🔒 **Mutual Non-Disclosure Agreement (NDA)** (Indefinite trade secret survivability, uncapped liquidated damages, injunction without bond).
+4. 💻 **Freelance / SaaS Master Services Agreement** (Pre-payment IP transfer trap, Net-90 delayed payout, 25% audit holdbacks).
+5. 🛡️ **Comprehensive Health Insurance Policy** (1% room rent sub-limit proportionate deduction clause, 24-hr emergency notification forfeiture, 20% co-pay).
+6. 💰 **SME Working Capital Loan Facility** (48-hour subjective material adverse change acceleration, 24% compound penal interest, blanket personal asset lien).
 
 ---
 
@@ -78,7 +92,7 @@ flowchart LR
 ### 1. Installation
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/legallens-ai.git
+git clone https://github.com/LuciferAksh/legallens-ai.git
 cd legallens-ai
 
 # Install dependencies
@@ -110,7 +124,7 @@ Open your browser at `http://localhost:3000`.
 Run the comprehensive automated test suite:
 
 ```bash
-# Run all 58 unit & component tests
+# Run all 73 unit & component tests across 22 test suites
 npm test
 
 # Run tests with code coverage report
@@ -118,6 +132,9 @@ npm run test:coverage
 
 # Run TypeScript typecheck
 npm run typecheck
+
+# Run ESLint 9 (0 errors, 0 warnings)
+npm run lint
 
 # Build for production
 npm run build
